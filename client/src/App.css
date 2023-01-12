@@ -1,38 +1,39 @@
+@font-face {
+	font-family: "Father-Farmhouse-Sans";
+	src: url("./assets/fonts/FatherFarmhouseSans-vmgJ4.otf");
+}
+
+@font-face {
+	font-family: "Kumbh-Sans";
+	src: url("./assets/fonts/KumbhSans-VariableFont_wght.ttf");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--asparagus: #68a357;
+	--seashell: #f7ebe8;
+}
+
+html,
+body,
+#root,
 .App {
-  text-align: center;
+	height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+	font-size: 62.5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+	background-color: var(--seashell);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App {
+	font-family: sans-serif;
 }
