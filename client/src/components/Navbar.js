@@ -30,11 +30,11 @@ export default function Navbar() {
 				</li>
 				<div className="nav-border"></div>
 				<li className="nav-link">
-					<a href="/">Find Recipes</a>
+					<Link to="/">Find Recipes</Link>
 				</li>
 				<div className="nav-border"></div>
 				<li className="nav-link">
-					<a href="/">Favorites</a>
+					<Link to="/favorites">Favorites</Link>
 				</li>
 
 				{auth.isAuthenticated && (
