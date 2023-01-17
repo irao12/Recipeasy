@@ -1,0 +1,28 @@
+.not-authenticated-page {
+	width: 100%;
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+}
+
+.authentication-msg {
+	margin: auto;
+	text-align: center;
+}
+
+.authentication-msg h1 {
+	font-family: "Kumbh-Sans";
+	font-size: 3.6rem;
+	margin-bottom: 7rem;
+}
+
+.authentication-msg button {
+	font-size: 2rem;
+	text-decoration: none;
+	width: 20rem;
+	height: 6rem;
+	border-radius: 2rem;
+	border: none;
+	background-color: var(--asparagus);
+	color: white;
+	cursor: pointer;
+}
