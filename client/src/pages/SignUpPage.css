@@ -1,6 +1,7 @@
 .sign-up-page {
 	display: flex;
-	height: calc(100% - var(--navbar-height));
+	height: max(calc(100% - var(--navbar-height)), 100%);
+	padding: 3rem 0;
 }
 
 .sign-up-form {
@@ -9,15 +10,12 @@
 	margin: auto;
 	background-color: white;
 	width: min(90%, 45rem);
-	height: min(100%, 70rem);
 	border-radius: 5rem;
 }
 
 .sign-up-form-section {
-	height: 100%;
 	padding: 4rem;
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 }
 
