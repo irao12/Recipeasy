@@ -1,0 +1,110 @@
+.find-recipes-page {
+    height: calc(100% - var(--navbar-height));
+    display: flex;
+}
+
+.find-recipes-content {
+    margin: auto;
+    display: flex;
+    width: 80%;
+    gap: 1rem;
+    height: 90%;
+
+}
+
+.find-recipes-results {
+    width: 60%;
+    height: 100%;
+    background-color: white;
+}
+
+.ingredients-content > h1 {
+    text-align: center;
+    font-family: "Kumbh-Sans";
+    margin: 1rem;
+    color: var(--pink);
+}
+
+.ingredients-container {
+    display: flex;
+    width: 30rem;
+    height: 100%;
+    background-color: var(--green-sheen);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.ingredients-content {
+    margin: auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0.75rem;   
+}
+
+.find-recipes-button {
+    background-color: var(--pink);
+    position: absolute;
+    bottom: 3rem;
+    color: white;
+    font-family: "Kumbh-Sans";
+    font-size: 2rem;
+    border: none;
+    width: 25rem;
+    height: 3rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+#add-ingredient-field {
+    height: 3rem;
+    width: 22rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    border-color: gray;
+    padding: 1rem;
+    font-family: "Kumbh-Sans";    
+}
+
+.ingredients-content > label {
+    font-size: 2rem;
+    font-family: "Kumbh-Sans";
+    align-self: flex-start;
+    margin: 0 0 1rem 1rem;
+}
+
+
+.add-ingredient-section {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.add-ingredient-button {
+    color: var(--asparagus);
+    width: 3rem;
+    height: 3rem;
+    font-size: 3rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.ingredients-list {
+    font-size: 2rem;
+    font-family: "Kumbh-Sans";
+    align-self: flex-start;
+    /*fix ^*/
+    max-height: 50%;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    width: 100%;
+    margin: 1rem;
+    scrollbar-width: 0.5rem;
+}

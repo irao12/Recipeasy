@@ -1,15 +1,61 @@
-import React from "react";
+import { useState } from "react";
+import "./FindRecipesPage.css"
 
 export default function FindRecipesPage() {
+	const [ingredients, setIngredients] = useState([]);
+	const [ingredientInput, setIngredientInput] = useState("");
+
+	const handleInputChange = (event) => {
+		setIngredientInput(event.target.value)
+	}
+ 
+	const addIngredient = (ingredient) => {
+		if (ingredient.trim() === "") {
+			return;
+		}
+
+		setIngredients((oldIngredients) => {
+			const oldIngredientsCopy = [...oldIngredients];
+			oldIngredientsCopy.push(ingredient)
+			return oldIngredientsCopy
+		})
+	}
+
 	return (
 		<div className="find-recipes-page">
 			<div className="find-recipes-content">
 				<div className="find-recipes-results">
+					<h1>Find Recipes</h1>
+        		</div>
+				<div className="ingredients-container">
+					<div className="ingredients-content">
+						<h1>My Ingredients</h1>
+						<label htmlFor="add-ingredient-field">Add Ingredient</label>
+						<div className="add-ingredient-section">
+							<input 
+								id="add-ingredient-field" 
+								type="text"
+								value={ingredientInput}
+								onChange={handleInputChange}
+							></input>
+							<button 
+								className="add-ingredient-button"
+								onClick={()=>{
+									addIngredient(ingredientInput)
+									setIngredientInput("")
+								}}
+							>+</button>
+						</div>
 
-        </div>
-				<div className="ingredients">
+						<ul className="ingredients-list">
+							{ingredients.map((ingredient)=>{
+								return <li>- {ingredient}</li>
+							})}
+						</ul>
 
-        </div>
+						<button className="find-recipes-button" type="button">FIND RECIPES</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

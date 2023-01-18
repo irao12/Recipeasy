@@ -8,6 +8,23 @@
 	src: url("./assets/fonts/KumbhSans-VariableFont_wght.ttf");
 }
 
+@font-face {
+	font-family: "Kristen-ITC";
+	src: url("./assets/fonts/ITCKRIST.ttf")
+}
+
+@font-face {
+	font-family: "Mali";
+	src: url("./assets/fonts/Mali-Regular.ttf");
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Mali";
+	src: url("./assets/fonts/Mali-SemiBold.ttf");
+	font-weight: 600;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -17,8 +34,10 @@
 :root {
 	--asparagus: #68a357;
 	--seashell: #f7ebe8;
-	--navbar-height: 12rem;
+	--navbar-height: 10rem;
 	--dark-green: #1a3b2d;
+	--pink: #C37D92;
+	--green-sheen: #76AFA7;
 }
 
 html,
