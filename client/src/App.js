@@ -5,6 +5,7 @@ import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import FindRecipesPage from "./pages/FindRecipesPage";
 
 function App() {
 	return (
@@ -18,6 +19,14 @@ function App() {
 						<Route
 							path="favorites"
 							element={<PrivateRoute></PrivateRoute>}
+						></Route>
+						<Route
+							path="findrecipes"
+							element={
+								<PrivateRoute>
+									<FindRecipesPage />
+								</PrivateRoute>
+							}
 						></Route>
 					</Routes>
 				</BrowserRouter>
