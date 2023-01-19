@@ -21,7 +21,12 @@ img.fridge-img {
 	margin: auto;
 }
 
+.login-group {
+	display: flex;
+}
+
 .login-section {
+	margin: auto;
 	width: 40rem;
 	padding: 2rem;
 	display: flex;
@@ -112,6 +117,7 @@ img.fridge-img {
 @media screen and (min-width: 60rem) {
 	img.fridge-img {
 		display: block;
+		max-height: 100%;
 	}
 	.login-section {
 		padding: 0;

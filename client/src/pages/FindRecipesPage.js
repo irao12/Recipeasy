@@ -8,6 +8,13 @@ export default function FindRecipesPage() {
 	const handleInputChange = (event) => {
 		setIngredientInput(event.target.value)
 	}
+
+	const handleEnterKey = (event)=>{
+									if (event.key === 'Enter') {
+										addIngredient(ingredientInput)
+										setIngredientInput("")
+									}
+								}
  
 	const addIngredient = (ingredient) => {
 		if (ingredient.trim() === "") {
@@ -16,8 +23,16 @@ export default function FindRecipesPage() {
 
 		setIngredients((oldIngredients) => {
 			const oldIngredientsCopy = [...oldIngredients];
-			oldIngredientsCopy.push(ingredient)
-			return oldIngredientsCopy
+			oldIngredientsCopy.push(ingredient);
+			return oldIngredientsCopy;
+		})
+	}
+
+	const deleteIngredient = (index) => {
+		setIngredients((oldIngredients)=>{
+			const oldIngredientsCopy = [...oldIngredients];
+			oldIngredientsCopy.splice(index, 1);
+			return oldIngredientsCopy;
 		})
 	}
 
@@ -37,6 +52,7 @@ export default function FindRecipesPage() {
 								type="text"
 								value={ingredientInput}
 								onChange={handleInputChange}
+								onKeyDown={handleEnterKey}
 							></input>
 							<button 
 								className="add-ingredient-button"
@@ -48,8 +64,10 @@ export default function FindRecipesPage() {
 						</div>
 
 						<ul className="ingredients-list">
-							{ingredients.map((ingredient)=>{
-								return <li>- {ingredient}</li>
+							{ingredients.map((ingredient, index)=>{
+								return <li className="ingredient">
+											<p onClick={()=>{deleteIngredient(index)}}>- {ingredient}</p>
+										</li>
 							})}
 						</ul>
 
