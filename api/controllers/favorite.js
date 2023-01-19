@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
 		imageURL: imageURL,
 		title: title,
 	};
-	Listing.create(data)
+	Favorite.create(data)
 		.then((newFavorite) => {
 			res.status(201).json(newFavorite);
 		})
