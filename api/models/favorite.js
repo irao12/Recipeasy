@@ -5,8 +5,12 @@ module.exports = (sequelize, DataTypes) => {
 
 	Favorite.init(
 		{
+			userID: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+			},
 			recipeID: {
-				type: DataTypes.STRING,
+				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
 			title: {
