@@ -1,7 +1,11 @@
 import { useState } from "react";
+import RecipeBox from "../components/RecipeBox";
 import "./FindRecipesPage.css"
+import recipes from "./RecipeMockData";
+const results = recipes.results;
 
 export default function FindRecipesPage() {
+
 	const [ingredients, setIngredients] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
 
@@ -36,11 +40,19 @@ export default function FindRecipesPage() {
 		})
 	}
 
+	console.log(results)
 	return (
 		<div className="find-recipes-page">
 			<div className="find-recipes-content">
 				<div className="find-recipes-results">
 					<h1>Find Recipes</h1>
+					<div className="recipes-container">
+						{results.map((recipe)=>{
+							return <RecipeBox 
+								recipe={recipe}/>
+						})
+						}
+					</div>
         		</div>
 				<div className="ingredients-container">
 					<div className="ingredients-content">
