@@ -1,11 +1,10 @@
 import { useState } from "react";
 import RecipeBox from "../components/RecipeBox";
 import "./FindRecipesPage.css";
-import recipes from "./RecipeMockData";
-const results = recipes.results;
 
 export default function FindRecipesPage() {
 	const [ingredients, setIngredients] = useState([]);
+	const [recipes, setRecipes] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
 
 	const handleInputChange = (event) => {
@@ -24,9 +23,13 @@ export default function FindRecipesPage() {
 			return;
 		}
 
+		if (ingredients.indexOf(ingredient.trim().toLowerCase()) !== -1) {
+			return;
+		}
+
 		setIngredients((oldIngredients) => {
 			const oldIngredientsCopy = [...oldIngredients];
-			oldIngredientsCopy.push(ingredient);
+			oldIngredientsCopy.push(ingredient.toLowerCase());
 			return oldIngredientsCopy;
 		});
 	};
@@ -39,14 +42,32 @@ export default function FindRecipesPage() {
 		});
 	};
 
-	console.log(results);
+	const getRecipes = () => {
+		const ingredientsList = ingredients.join(",");
+		const apiURL =
+			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList}&ranking=2&apiKey=d4cac46603544e9490677710320abee9`.replaceAll(
+				" ",
+				"_"
+			);
+		console.log(apiURL);
+
+		fetch(apiURL, {
+			method: "GET",
+		}).then((response) => {
+			response.json().then((results) => {
+				setRecipes(results);
+				console.log(results);
+			});
+		});
+	};
+
 	return (
 		<div className="find-recipes-page">
 			<div className="find-recipes-content">
 				<div className="find-recipes-results">
 					<h1>Find Recipes</h1>
 					<div className="recipes-container">
-						{results.map((recipe, index) => {
+						{recipes.map((recipe, index) => {
 							return (
 								<RecipeBox key={recipe.index} recipe={recipe} />
 							);
@@ -94,7 +115,11 @@ export default function FindRecipesPage() {
 							})}
 						</ul>
 
-						<button className="find-recipes-button" type="button">
+						<button
+							className="find-recipes-button"
+							type="button"
+							onClick={getRecipes}
+						>
 							FIND RECIPES
 						</button>
 					</div>
