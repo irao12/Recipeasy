@@ -1,60 +1,56 @@
 .reicpe-box {
-	height: 25rem;
+    height: 25rem;
 }
 
 .recipe-content {
-	background-color: white;
-	width: 20rem;
-	height: 20rem;
-	margin: 2rem;
-	margin-left: 0;
-	border-radius: 1rem;
-	box-shadow: 0.5rem 0.5rem rgba(0, 0, 0, 0.235);
+    background-color: white;
+    width: 20rem;
+    height: 20rem;
+    margin: 2rem;
+    margin-left: 0;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem rgba(0, 0, 0, 0.235);
 
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .recipe-title {
-	text-align: center;
-	margin: 0 1rem;
-	font-family: "Kumbh-Sans";
-	font-size: 1.75rem;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+    text-align: center;
+    margin: 0 1rem;
+    font-family: "Kumbh-Sans";
+    font-size: 1.75rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .recipe-favorite-icon {
-	width: 3rem;
-	align-self: flex-end;
-	margin-top: 0.2rem;
-	margin-right: 0.5rem;
-	cursor: pointer;
+    width: 3rem;
+    align-self: flex-end;
+    margin-top: 0.2rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
 }
 
 .recipe-image {
-	width: 100%;
-	padding: 0.5rem 1.25rem;
-	height: 10rem;
-	object-fit: cover;
+    width: 100%;
+    padding: 0.5rem 1.25rem;
+    height: 10rem;
+    object-fit: cover;
 }
 
 .time-and-status {
-	display: flex;
-	gap: 1rem;
-	padding: 0.5rem;
-	align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+
 }
 
 .recipe-time {
-	font-family: "Kumbh-Sans";
-	font-size: 1.6rem;
-	margin-left: 0.75rem;
-}
-
-.missing-ingredients-count {
-	font-family: "Kumbh-Sans";
-	font-size: 1.3rem;
+    font-family: "Kumbh-Sans";
+    font-size: 1.6rem;
+    margin-left: 0.75rem;
 }

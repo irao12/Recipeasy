@@ -12,8 +12,8 @@ export default function RecipeBox({ recipe }) {
 	const {
 		title,
 		image: imageURL,
-		// readyInMinutes: time,
-		missedIngredientCount,
+		readyInMinutes: time,
+		missingIngredients,
 		sourceUrl: recipeURL,
 		id: recipeID,
 	} = recipe;
@@ -37,7 +37,7 @@ export default function RecipeBox({ recipe }) {
 			.catch((err) => {
 				console.log(err);
 			});
-	}, [recipeID]);
+	}, []);
 
 	let statusIcon;
 
@@ -56,6 +56,7 @@ export default function RecipeBox({ recipe }) {
 				.then((response) => {
 					console.log(response);
 					if (!response.ok) {
+						console.log(response);
 						throw new Error("failed to remove favorite");
 					}
 					setIsFavorited(false);
@@ -91,9 +92,9 @@ export default function RecipeBox({ recipe }) {
 		}
 	};
 
-	if (missedIngredientCount >= 5) {
+	if (missingIngredients >= 5) {
 		statusIcon = StatusDanger;
-	} else if (missedIngredientCount >= 1) {
+	} else if (missingIngredients >= 3) {
 		statusIcon = StatusWarning;
 	} else {
 		statusIcon = StatusOkay;
@@ -111,14 +112,12 @@ export default function RecipeBox({ recipe }) {
 				<p className="recipe-title">{title}</p>
 				<img className="recipe-image" src={imageURL} alt={title} />
 				<div className="time-and-status">
+					<p className="recipe-time">{time} min</p>
 					<img
 						className="recipe-status"
 						src={statusIcon}
 						alt="status"
 					/>
-					<p className="missing-ingredients-count">{`${missedIngredientCount} Missing Ingredient${
-						missedIngredientCount === 1 ? "" : "s"
-					}`}</p>
 				</div>
 			</div>
 		</div>
