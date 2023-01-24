@@ -1,0 +1,131 @@
+.favorites-page {
+    height: calc(100% - var(--navbar-height));
+    display: flex;
+    padding: 0 7rem;
+}
+
+.favorites-content {
+    margin: auto;
+    display: flex;
+    gap: 3rem;
+    height: 90%;
+    width: 100%;
+}
+
+.favorites-results {
+    width: 100%;
+    height: 100%;
+}
+
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    column-gap: 2.5rem;
+}
+
+.favorites-results h1 {
+    font-family: "Kumbh-Sans";
+    font-size: 3.6rem;
+    font-weight: 400;
+}
+
+.ingredients-content > h1 {
+    text-align: center;
+    font-family: "Kumbh-Sans";
+    margin: 1rem;
+    color: var(--pink);
+}
+
+.ingredients-container {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    width: 30rem;
+    height: 100%;
+    background-color: var(--green-sheen);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.ingredients-content {
+    margin: auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0.75rem;   
+}
+
+.ingredients-content > label {
+    font-size: 2rem;
+    font-family: "Kumbh-Sans";
+    align-self: flex-start;
+    margin: 0 0 1rem 1rem;
+}
+
+#add-ingredient-field {
+    height: 3rem;
+    width: 22rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    border-color: gray;
+    padding: 1rem;
+    font-family: "Kumbh-Sans";    
+}
+
+.add-ingredient-button {
+    color: var(--asparagus);
+    width: 3rem;
+    height: 3rem;
+    font-size: 3rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.add-ingredient-section {
+    display: flex;
+    margin: 0 auto;
+}
+
+.ingredients-list {
+    font-size: 2rem;
+    font-family: "Kumbh-Sans";
+    align-self: flex-start;
+    /*fix ^*/
+    max-height: calc(100% - 19rem);
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    width: 95%;
+    margin: 1rem;
+    scrollbar-width: 0.5rem;
+}
+
+.ingredient > p {
+    cursor: pointer;
+    display: inline;
+}
+
+.ingredients-list .ingredient>p:hover {
+    opacity: 50%;
+    text-decoration: line-through;
+}
+
+.favorites-button {
+    background-color: var(--pink);
+    position: absolute;
+    bottom: 3rem;
+    color: white;
+    font-family: "Kumbh-Sans";
+    font-size: 2rem;
+    border: none;
+    width: 25rem;
+    height: 3rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}

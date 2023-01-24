@@ -8,6 +8,9 @@ import StatusOkay from "../assets/icons/status_okay.svg";
 import StatusWarning from "../assets/icons/status_warning.svg";
 import StatusDanger from "../assets/icons/status_danger.svg";
 
+const KEY = process.env.REACT_APP_API_KEY;
+
+
 export default function RecipeBox({ recipe }) {
 	const {
 		title,
@@ -41,55 +44,54 @@ export default function RecipeBox({ recipe }) {
 
 	let statusIcon;
 
-	const toggleFavorite = () => {
-		if (isFavorited) {
-			fetch(`/api/favorite/`, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					userID: auth.user.id,
-					recipeID: recipeID,
-				}),
-			})
-				.then((response) => {
-					console.log(response);
-					if (!response.ok) {
-						throw new Error("failed to remove favorite");
-					}
-					setIsFavorited(false);
-				})
-				.catch((err) => {
-					console.log("Could not set a favorite");
-				});
-
-			return;
-		} else {
-			fetch("/api/favorite", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					userID: auth.user.id,
-					recipeID: recipeID,
-					imageURL: imageURL,
-					title: title,
-				}),
-			})
-				.then((response) => {
-					if (!response.ok) {
-						console.log(response);
-						throw new Error("failed to favorite");
-					}
-					setIsFavorited(true);
-				})
-				.catch((err) => {
-					console.log("Could not set a favorite");
-				});
+	const toggleFavorite = async () => {
+		try {
+		  if (isFavorited) {
+			const response = await fetch(`/api/favorite/`, {
+			  method: "DELETE",
+			  headers: {
+				"Content-Type": "application/json",
+			  },
+			  body: JSON.stringify({
+				userID: auth.user.id,
+				recipeID: recipeID,
+			  }),
+			});
+			if (!response.ok) {
+			  throw new Error("failed to remove favorite");
+			}
+			setIsFavorited(false);
+		  } else {
+			const apiURL = `https://api.spoonacular.com/recipes/${recipeID}/ingredientWidget.json?apiKey=${KEY}`;
+			const response = await fetch(apiURL);
+			const results = await response.json();
+			const ingredients = results.ingredients.map((ingredient) => ingredient.name);
+	  
+			const postResponse = await fetch("/api/favorite", {
+			  method: "POST",
+			  headers: {
+				"Content-Type": "application/json",
+			  },
+			  body: JSON.stringify({
+				userID: auth.user.id,
+				recipeID: recipeID,
+				imageURL: imageURL,
+				title: title,
+				missedIngredientCount: missedIngredientCount,
+				ingredients: ingredients,
+			  }),
+			});
+			console.log("Recipe Box: ", ingredients);
+			if (!postResponse.ok) {
+			  throw new Error("failed to favorite");
+			}
+			setIsFavorited(true);
+		  }
+		} catch (err) {
+		  console.log("Could not set a favorite", err);
 		}
-	};
+	  };
+	
 
 	if (missedIngredientCount >= 5) {
 		statusIcon = StatusDanger;
