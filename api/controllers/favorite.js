@@ -36,14 +36,13 @@ router.get("/:userID", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	let { userID, recipeID, imageURL, title, missedIngredientCount, ingredients} = req.body;
+	let { userID, recipeID, imageURL, title, ingredients } = req.body;
 	let data = {
 		userID: userID,
 		recipeID: recipeID,
 		imageURL: imageURL,
 		title: title,
-		missedIngredientCount : missedIngredientCount,
-		ingredients : ingredients,
+		ingredients: ingredients,
 	};
 	console.log(userID, recipeID);
 

@@ -20,9 +20,6 @@ module.exports = (sequelize, DataTypes) => {
 			imageURL: {
 				type: DataTypes.STRING,
 			},
-			missedIngredientCount: {
-				type: DataTypes.INTEGER,
-			},
 			ingredients: {
 				type: DataTypes.ARRAY(DataTypes.STRING),
 			},
