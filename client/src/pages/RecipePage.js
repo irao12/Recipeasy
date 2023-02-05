@@ -33,7 +33,7 @@ export default function RecipePage() {
 	};
 
 	const getRecipeInformation = () => {
-		const url = `http://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${KEY}`;
+		const url = `https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${KEY}`;
 		console.log(url);
 		fetch(url, {
 			method: "GET",

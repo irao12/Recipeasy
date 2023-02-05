@@ -5,7 +5,7 @@
 }
 
 .recipe-page .recipe-wrapper {
-	margin: 2rem auto;
+	margin: auto;
 	width: min(90%, 80rem);
 	height: 55rem;
 	border: 1.5rem solid #76afa7;
@@ -93,7 +93,7 @@
 	font-weight: 300;
 	padding-bottom: 0.5rem;
 	height: 80%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .recipe-page .recipe-steps {

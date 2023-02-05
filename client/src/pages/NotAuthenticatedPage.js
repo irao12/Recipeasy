@@ -7,7 +7,7 @@ export default function NotAuthenticatedPage() {
 	return (
 		<div className="not-authenticated-page">
 			<div className="authentication-msg">
-				<h1>You need an account in order to acces this page!</h1>
+				<h1>You need an account in order to access this page!</h1>
 				<button
 					type="button"
 					className="log-in-button"

@@ -1,0 +1,31 @@
+.landing-page {
+    width: 100%;
+    height: calc(100% - var(--navbar-height));
+    display: flex;
+}
+
+.landing-page-content {
+    margin: auto;
+    padding: 5rem;
+}
+
+.landing-page-content h1 {
+    font-family: "Kumbh-Sans";
+    font-size: 4rem;
+    font-weight: 500;
+}
+
+.landing-page-text {
+    margin: 1rem 0 1rem 0;
+    padding: 1rem 0 1rem 0;
+}
+
+.landing-page-text p {
+    font-family: "Kumbh-Sans";
+    font-size: 2rem;
+    margin: 2rem 0 2rem 0;
+}
+
+.sign-up-link {
+    font-size: 2rem;
+}

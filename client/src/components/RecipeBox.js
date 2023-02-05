@@ -105,14 +105,17 @@ export default function RecipeBox({ recipe }) {
 	return (
 		<div
 			className="recipe-box"
-			onClick={() => navigate(`/recipes/${recipeID}`)}
+			onClick={(e) => {navigate(`/recipes/${recipeID}`)}}
 		>
 			<div className="recipe-content">
 				<img
 					src={isFavorited ? HeartFilled : HeartUnfilled}
 					alt={isFavorited ? "favorited" : "not favorited"}
 					className="recipe-favorite-icon"
-					onClick={toggleFavorite}
+					onClick={(e)=>{
+						e.stopPropagation()
+						toggleFavorite()}
+					}
 				/>
 				<p className="recipe-title">{title}</p>
 				<img className="recipe-image" src={imageURL} alt={title} />

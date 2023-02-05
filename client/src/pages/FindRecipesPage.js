@@ -4,6 +4,7 @@ import "./FindRecipesPage.css";
 const KEY = process.env.REACT_APP_API_KEY;
 
 export default function FindRecipesPage() {
+
 	const [ingredients, setIngredients] = useState([]);
 	const [recipes, setRecipes] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
