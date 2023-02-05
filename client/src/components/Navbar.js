@@ -22,19 +22,20 @@ export default function Navbar() {
 			</div>
 			<ul className="nav-links">
 				<li className="nav-link">
-					{auth.isAuthenticated ? (
-						<Link to="/">Account</Link>
-					) : (
-						<Link to="/login">Log In</Link>
-					)}
-				</li>
-				<div className="nav-border"></div>
-				<li className="nav-link">
 					<Link to="/findrecipes">Find Recipes</Link>
 				</li>
 				<div className="nav-border"></div>
 				<li className="nav-link">
 					<Link to="/favorites">Favorites</Link>
+				</li>
+				<div className="nav-border"></div>
+
+				<li className="nav-link">
+					{auth.isAuthenticated ? (
+						<Link to="/">Account</Link>
+					) : (
+						<Link to="/login">Log In</Link>
+					)}
 				</li>
 
 				{auth.isAuthenticated && (
