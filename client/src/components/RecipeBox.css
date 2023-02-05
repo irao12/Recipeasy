@@ -1,8 +1,9 @@
-.reicpe-box {
+.recipe-box {
 	height: 25rem;
+	cursor: pointer;
 }
 
-.recipe-content {
+.recipe-box .recipe-content {
 	background-color: white;
 	width: 20rem;
 	height: 20rem;
@@ -16,7 +17,7 @@
 	flex-direction: column;
 }
 
-.recipe-title {
+.recipe-box .recipe-title {
 	text-align: center;
 	margin: 0 1rem;
 	font-family: "Kumbh-Sans";
@@ -26,7 +27,7 @@
 	text-overflow: ellipsis;
 }
 
-.recipe-favorite-icon {
+.recipe-box .recipe-favorite-icon {
 	width: 3rem;
 	align-self: flex-end;
 	margin-top: 0.2rem;
@@ -34,27 +35,27 @@
 	cursor: pointer;
 }
 
-.recipe-image {
+.recipe-box .recipe-image {
 	width: 100%;
 	padding: 0.5rem 1.25rem;
 	height: 10rem;
 	object-fit: cover;
 }
 
-.time-and-status {
+.recipe-box .time-and-status {
 	display: flex;
 	gap: 1rem;
 	padding: 0.5rem;
 	align-items: center;
 }
 
-.recipe-time {
+.recipe-box .recipe-time {
 	font-family: "Kumbh-Sans";
 	font-size: 1.6rem;
 	margin-left: 0.75rem;
 }
 
-.missing-ingredients-count {
+.recipe-box .missing-ingredients-count {
 	font-family: "Kumbh-Sans";
 	font-size: 1.3rem;
 }

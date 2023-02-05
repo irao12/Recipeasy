@@ -7,9 +7,9 @@ import HeartFilled from "../assets/icons/heart_filled.svg";
 import StatusOkay from "../assets/icons/status_okay.svg";
 import StatusWarning from "../assets/icons/status_warning.svg";
 import StatusDanger from "../assets/icons/status_danger.svg";
+import { useNavigate } from "react-router-dom";
 
 const KEY = process.env.REACT_APP_API_KEY;
-
 
 export default function RecipeBox({ recipe }) {
 	const {
@@ -23,6 +23,7 @@ export default function RecipeBox({ recipe }) {
 
 	const [isFavorited, setIsFavorited] = useState(recipe.isFavorited);
 	const auth = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetch(`/api/favorite/?userID=${auth.user.id}&recipeID=${recipeID}`, {
@@ -46,52 +47,52 @@ export default function RecipeBox({ recipe }) {
 
 	const toggleFavorite = async () => {
 		try {
-		  if (isFavorited) {
-			const response = await fetch(`/api/favorite/`, {
-			  method: "DELETE",
-			  headers: {
-				"Content-Type": "application/json",
-			  },
-			  body: JSON.stringify({
-				userID: auth.user.id,
-				recipeID: recipeID,
-			  }),
-			});
-			if (!response.ok) {
-			  throw new Error("failed to remove favorite");
+			if (isFavorited) {
+				const response = await fetch(`/api/favorite/`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						userID: auth.user.id,
+						recipeID: recipeID,
+					}),
+				});
+				if (!response.ok) {
+					throw new Error("failed to remove favorite");
+				}
+				setIsFavorited(false);
+			} else {
+				const apiURL = `https://api.spoonacular.com/recipes/${recipeID}/ingredientWidget.json?apiKey=${KEY}`;
+				const response = await fetch(apiURL);
+				const results = await response.json();
+				const ingredients = results.ingredients.map(
+					(ingredient) => ingredient.name
+				);
+
+				const postResponse = await fetch("/api/favorite", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						userID: auth.user.id,
+						recipeID: recipeID,
+						imageURL: imageURL,
+						title: title,
+						ingredients: ingredients,
+					}),
+				});
+				console.log("Recipe Box: ", ingredients);
+				if (!postResponse.ok) {
+					throw new Error("failed to favorite");
+				}
+				setIsFavorited(true);
 			}
-			setIsFavorited(false);
-		  } else {
-			const apiURL = `https://api.spoonacular.com/recipes/${recipeID}/ingredientWidget.json?apiKey=${KEY}`;
-			const response = await fetch(apiURL);
-			const results = await response.json();
-			const ingredients = results.ingredients.map((ingredient) => ingredient.name);
-	  
-			const postResponse = await fetch("/api/favorite", {
-			  method: "POST",
-			  headers: {
-				"Content-Type": "application/json",
-			  },
-			  body: JSON.stringify({
-				userID: auth.user.id,
-				recipeID: recipeID,
-				imageURL: imageURL,
-				title: title,
-				missedIngredientCount: missedIngredientCount,
-				ingredients: ingredients,
-			  }),
-			});
-			console.log("Recipe Box: ", ingredients);
-			if (!postResponse.ok) {
-			  throw new Error("failed to favorite");
-			}
-			setIsFavorited(true);
-		  }
 		} catch (err) {
-		  console.log("Could not set a favorite", err);
+			console.log("Could not set a favorite", err);
 		}
-	  };
-	
+	};
 
 	if (missedIngredientCount >= 5) {
 		statusIcon = StatusDanger;
@@ -102,7 +103,10 @@ export default function RecipeBox({ recipe }) {
 	}
 
 	return (
-		<div className="recipe-box">
+		<div
+			className="recipe-box"
+			onClick={() => navigate(`/recipes/${recipeID}`)}
+		>
 			<div className="recipe-content">
 				<img
 					src={isFavorited ? HeartFilled : HeartUnfilled}

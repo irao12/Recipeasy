@@ -1,0 +1,147 @@
+.recipe-page {
+	height: calc(100% - var(--navbar-height));
+	width: 100%;
+	display: flex;
+}
+
+.recipe-page .recipe-wrapper {
+	margin: 2rem auto;
+	width: min(90%, 80rem);
+	height: 55rem;
+	border: 1.5rem solid #76afa7;
+	border-radius: 1rem;
+	background-color: #76afa7;
+}
+
+.recipe-page .recipe-content {
+	border-radius: 0.5rem;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	font-family: "Kumbh-Sans";
+}
+
+.recipe-page .recipe-info {
+	width: 50%;
+	background-color: white;
+	border-radius: 0.5rem;
+	border-right: solid 0.1rem rgb(207, 206, 206);
+	display: flex;
+	gap: 0.5rem;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 2rem;
+}
+
+.recipe-page .recipe-favorite-icon {
+	width: 5rem;
+	align-self: flex-start;
+	margin-top: 0.2rem;
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+
+.recipe-page .recipe-title {
+	font-weight: 400;
+	font-size: 2.4rem;
+	text-align: center;
+}
+
+.recipe-page .recipe-image {
+	width: calc(min(30rem, 90%) - 4rem);
+	margin-bottom: 1.6rem;
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.recipe-page .recipe-time {
+	font-size: 2.4rem;
+	margin-bottom: 1rem;
+}
+
+.recipe-page .recipe-link {
+	font-size: 1.6rem;
+	color: black;
+	padding-bottom: 2rem;
+}
+
+.recipe-page .recipe-link:visited {
+	color: black;
+}
+
+.recipe-page .recipe-details {
+	width: 50%;
+	background-color: white;
+	border-radius: 0.5rem;
+	border-left: solid 0.1rem rgb(207, 206, 206);
+}
+
+.recipe-page .recipe-ingredients-heading {
+	font-size: 1.8rem;
+	margin-bottom: 0.5rem;
+}
+
+.recipe-page .recipe-ingredients {
+	padding: 3rem 4rem 0 4rem;
+	height: 50%;
+}
+
+.recipe-ingredients .ingredients {
+	list-style: none;
+	margin-left: 2rem;
+	font-size: 1.6rem;
+	font-weight: 300;
+	padding-bottom: 0.5rem;
+	height: 80%;
+	overflow-y: scroll;
+}
+
+.recipe-page .recipe-steps {
+	padding: 0rem 4rem 3rem 4rem;
+	height: 50%;
+}
+
+.recipe-page .recipe-steps-heading {
+	font-size: 1.8rem;
+	margin-bottom: 1rem;
+}
+
+.recipe-page .recipe-steps-list {
+	list-style-type: none;
+	margin-left: 2rem;
+	font-size: 1.6rem;
+	height: 90%;
+	font-weight: 300;
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 800px) {
+	.recipe-page .recipe-content {
+		flex-direction: column;
+	}
+	.recipe-page .recipe-info {
+		width: 100%;
+		border-radius: 0;
+		border: none;
+	}
+	.recipe-page .recipe-details {
+		width: 100%;
+		border-radius: 0;
+		border: none;
+	}
+	.recipe-page .recipe-wrapper {
+		display: flex;
+		height: fit-content;
+	}
+
+	.recipe-ingredients .ingredients {
+		overflow: visible;
+		height: 100%;
+		margin-bottom: 5rem;
+	}
+
+	.recipe-page .recipe-steps-list {
+		overflow: visible;
+		height: 100%;
+	}
+}

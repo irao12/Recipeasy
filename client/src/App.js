@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import FindRecipesPage from "./pages/FindRecipesPage";
+import RecipePage from "./pages/RecipePage";
 import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
 									<FindRecipesPage />
 								</PrivateRoute>
 							}
+						></Route>
+						<Route
+							path="recipes/:recipeID"
+							element={<RecipePage />}
 						></Route>
 					</Routes>
 				</BrowserRouter>
