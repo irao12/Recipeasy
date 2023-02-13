@@ -32,7 +32,7 @@ export default function Navbar() {
 
 				<li className="nav-link">
 					{auth.isAuthenticated ? (
-						<Link to="/">Account</Link>
+						<Link to="/account">Account</Link>
 					) : (
 						<Link to="/login">Log In</Link>
 					)}

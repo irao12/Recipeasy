@@ -3,7 +3,6 @@ const e = require("express");
 const { favorite: Favorite } = require("../models");
 
 router.get("/", (req, res) => {
-	console.log("HELLLO");
 	const { userID, recipeID } = req.query;
 	Favorite.findOne({ where: { userID: userID, recipeID: recipeID } })
 		.then((favorite) => {

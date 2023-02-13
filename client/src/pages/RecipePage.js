@@ -13,6 +13,7 @@ export default function RecipePage() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isFavorited, setIsFavorited] = useState(false);
 	const [recipe, setRecipe] = useState({});
+	const [isCompleted, setIsCompleted] = useState(false);
 
 	const checkFavorite = () => {
 		fetch(`/api/favorite/?userID=${auth.user.id}&recipeID=${recipeID}`, {
@@ -98,6 +99,27 @@ export default function RecipePage() {
 		}
 	};
 
+	const markCompleted = () => {
+		fetch("/api/history", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				userID: auth.user.id,
+				recipeID: recipeID,
+				imageURL: recipe.imageURL,
+				title: recipe.title,
+				ingredients: recipe.ingredients,
+			}),
+		}).then((response) => {
+			if (!response.ok) {
+				throw new Error("failed to complete");
+			}
+			setIsCompleted(true);
+		});
+	};
+
 	useEffect(() => {
 		getRecipeInformation();
 	}, [recipeID]);
@@ -165,6 +187,17 @@ export default function RecipePage() {
 									})}
 								</ul>
 							</div>
+							<button
+								type="button"
+								className={
+									isCompleted
+										? "complete-recipe-button inactive"
+										: "complete-recipe-button"
+								}
+								onClick={isCompleted ? () => {} : markCompleted}
+							>
+								{isCompleted ? "COMPLETED" : "COMPLETE"}
+							</button>
 						</div>
 					</div>
 				)}

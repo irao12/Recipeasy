@@ -74,6 +74,10 @@
 	background-color: white;
 	border-radius: 0.5rem;
 	border-left: solid 0.1rem rgb(207, 206, 206);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 2rem 0;
 }
 
 .recipe-page .recipe-ingredients-heading {
@@ -83,7 +87,7 @@
 
 .recipe-page .recipe-ingredients {
 	padding: 3rem 4rem 0 4rem;
-	height: 50%;
+	height: 40%;
 }
 
 .recipe-ingredients .ingredients {
@@ -98,7 +102,7 @@
 
 .recipe-page .recipe-steps {
 	padding: 0rem 4rem 3rem 4rem;
-	height: 50%;
+	height: 40%;
 }
 
 .recipe-page .recipe-steps-heading {
@@ -115,6 +119,24 @@
 	overflow-y: auto;
 }
 
+.recipe-page .complete-recipe-button {
+	align-self: center;
+
+	width: 20rem;
+	height: 4rem;
+	font-family: "Kumbh-Sans";
+	font-weight: 300;
+	font-size: 2rem;
+	color: white;
+	background-color: var(--asparagus);
+	border: none;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+.complete-recipe-button .invalid {
+	color: gray;
+}
 @media screen and (max-width: 800px) {
 	.recipe-page .recipe-content {
 		flex-direction: column;

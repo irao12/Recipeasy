@@ -1,0 +1,29 @@
+.account-page {
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+}
+
+.account-content {
+	background-color: white;
+	width: 50rem;
+	height: 90%;
+	padding: 4rem 3rem;
+	margin: auto;
+	border-radius: 1rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.account-page-button {
+	background-color: var(--asparagus);
+	padding: 2rem 1rem;
+	border: none;
+	border-radius: 1rem;
+
+	color: white;
+	font-family: "Kumbh-Sans";
+	font-size: 2.4rem;
+	font-weight: 400;
+}

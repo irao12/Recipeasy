@@ -8,7 +8,9 @@ import LoginPage from "./pages/LoginPage";
 import FindRecipesPage from "./pages/FindRecipesPage";
 import RecipePage from "./pages/RecipePage";
 import FavoritesPage from "./pages/FavoritesPage";
-import LandingPage from "./pages/LandingPage"
+import LandingPage from "./pages/LandingPage";
+import HistoryPage from "./pages/HistoryPage";
+import AccountPage from "./pages/AccountPage";
 
 function App() {
 	return (
@@ -17,7 +19,7 @@ function App() {
 				<BrowserRouter>
 					<Navbar />
 					<Routes>
-						<Route path="" element={<LandingPage/>}></Route>
+						<Route path="" element={<LandingPage />}></Route>
 						<Route path="signup" element={<SignUpPage />}></Route>
 						<Route path="login" element={<LoginPage />} />
 						<Route
@@ -29,10 +31,26 @@ function App() {
 							}
 						></Route>
 						<Route
+							path="history"
+							element={
+								<PrivateRoute>
+									<HistoryPage />
+								</PrivateRoute>
+							}
+						></Route>
+						<Route
 							path="findrecipes"
 							element={
 								<PrivateRoute>
 									<FindRecipesPage />
+								</PrivateRoute>
+							}
+						></Route>
+						<Route
+							path="account"
+							element={
+								<PrivateRoute>
+									<AccountPage />
 								</PrivateRoute>
 							}
 						></Route>
