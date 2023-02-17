@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { user: User } = require("../models");
+const { user: User, ingredientList: IngredientList } = require("../models");
 const passport = require("../middlewares/authentication");
 
 // url: /api/auth/signup
@@ -13,6 +13,7 @@ router.post("/signup", (req, res) => {
 	})
 		.then((user) => {
 			//save user to database.
+			user.createIngredientList();
 			req.login(user, () => res.status(201).json(user));
 		})
 		.catch((error) => {

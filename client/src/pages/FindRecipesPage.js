@@ -1,13 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RecipeBox from "../components/RecipeBox";
 import "./FindRecipesPage.css";
 const KEY = process.env.REACT_APP_API_KEY;
 
 export default function FindRecipesPage() {
-
 	const [ingredients, setIngredients] = useState([]);
 	const [recipes, setRecipes] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
+
+	useEffect(() => {
+		fetch("/api/ingredientlist")
+			.then((response) => {
+				response.json().then((list) => {
+					setIngredients(list.ingredients);
+				});
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	}, []);
+
+	const updateList = (newIngredients) => {
+		fetch("/api/ingredientlist", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				ingredients: newIngredients,
+			}),
+		});
+	};
 
 	const handleInputChange = (event) => {
 		setIngredientInput(event.target.value);
@@ -32,6 +55,7 @@ export default function FindRecipesPage() {
 		setIngredients((oldIngredients) => {
 			const oldIngredientsCopy = [...oldIngredients];
 			oldIngredientsCopy.push(ingredient.toLowerCase());
+			updateList(oldIngredientsCopy);
 			return oldIngredientsCopy;
 		});
 	};
@@ -40,6 +64,7 @@ export default function FindRecipesPage() {
 		setIngredients((oldIngredients) => {
 			const oldIngredientsCopy = [...oldIngredients];
 			oldIngredientsCopy.splice(index, 1);
+			updateList(oldIngredientsCopy);
 			return oldIngredientsCopy;
 		});
 	};

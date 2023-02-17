@@ -3,7 +3,6 @@ const e = require("express");
 const { history: History } = require("../models");
 
 router.get("/", (req, res) => {
-	console.log(req.user.id);
 	History.findAll({
 		where: { userID: req.user.id },
 		order: [["updatedAt", "DESC"]],
