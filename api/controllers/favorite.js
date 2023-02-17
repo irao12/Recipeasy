@@ -3,8 +3,8 @@ const e = require("express");
 const { favorite: Favorite } = require("../models");
 
 router.get("/", (req, res) => {
-	const { userID, recipeID } = req.query;
-	Favorite.findOne({ where: { userID: userID, recipeID: recipeID } })
+	const { recipeID } = req.query;
+	Favorite.findOne({ where: { userID: req.user.id, recipeID: recipeID } })
 		.then((favorite) => {
 			if (favorite) {
 				res.status(200).json({ isFavorite: true });
@@ -18,10 +18,9 @@ router.get("/", (req, res) => {
 		});
 });
 
-router.get("/:userID", (req, res) => {
-	const { userID } = req.params;
+router.get("/all", (req, res) => {
 	Favorite.findAll({
-		where: { userID: userID },
+		where: { userID: req.user.id },
 		order: [["updatedAt", "DESC"]],
 	})
 		.then((allFavorites) => {

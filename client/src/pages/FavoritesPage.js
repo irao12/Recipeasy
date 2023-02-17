@@ -10,7 +10,7 @@ export default function FavoritesPage() {
 	const [sortBy, setSortBy] = useState("Newest");
 
 	const getFavorites = () => {
-		fetch(`/api/favorite/${auth.user.id}`).then((response) => {
+		fetch(`/api/favorite/all`).then((response) => {
 			response
 				.json()
 				.then((favorites) => {

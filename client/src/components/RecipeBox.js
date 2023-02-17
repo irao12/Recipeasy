@@ -26,7 +26,7 @@ export default function RecipeBox({ recipe }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`/api/favorite/?userID=${auth.user.id}&recipeID=${recipeID}`, {
+		fetch(`/api/favorite/?recipeID=${recipeID}`, {
 			method: "GET",
 		})
 			.then((response) => {
@@ -54,7 +54,6 @@ export default function RecipeBox({ recipe }) {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						userID: auth.user.id,
 						recipeID: recipeID,
 					}),
 				});
@@ -105,17 +104,19 @@ export default function RecipeBox({ recipe }) {
 	return (
 		<div
 			className="recipe-box"
-			onClick={(e) => {navigate(`/recipes/${recipeID}`)}}
+			onClick={(e) => {
+				navigate(`/recipes/${recipeID}`);
+			}}
 		>
 			<div className="recipe-content">
 				<img
 					src={isFavorited ? HeartFilled : HeartUnfilled}
 					alt={isFavorited ? "favorited" : "not favorited"}
 					className="recipe-favorite-icon"
-					onClick={(e)=>{
-						e.stopPropagation()
-						toggleFavorite()}
-					}
+					onClick={(e) => {
+						e.stopPropagation();
+						toggleFavorite();
+					}}
 				/>
 				<p className="recipe-title">{title}</p>
 				<img className="recipe-image" src={imageURL} alt={title} />

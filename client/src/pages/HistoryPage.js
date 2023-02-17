@@ -5,7 +5,7 @@ export default function HistoryPage() {
 	const [history, setHistory] = useState([]);
 
 	const getHistory = () => {
-		fetch(`/api/history/${auth.user.id}`).then((response) => {
+		fetch(`/api/history/`).then((response) => {
 			if (!response.ok) {
 				throw new Error("failed to get history");
 			}

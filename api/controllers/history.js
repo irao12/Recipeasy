@@ -2,10 +2,10 @@ const router = require("express").Router();
 const e = require("express");
 const { history: History } = require("../models");
 
-router.get("/:userID", (req, res) => {
-	const { userID } = req.params;
+router.get("/", (req, res) => {
+	console.log(req.user.id);
 	History.findAll({
-		where: { userID: userID },
+		where: { userID: req.user.id },
 		order: [["updatedAt", "DESC"]],
 	})
 		.then((allHistory) => {
@@ -19,9 +19,9 @@ router.get("/:userID", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	let { userID, recipeID, imageURL, title, ingredients } = req.body;
+	let { recipeID, imageURL, title, ingredients } = req.body;
 	let data = {
-		userID: userID,
+		userID: req.user.id,
 		recipeID: recipeID,
 		imageURL: imageURL,
 		title: title,
