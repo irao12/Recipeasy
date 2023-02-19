@@ -75,7 +75,6 @@ export default function FavoritesPage() {
   );
 
   const sortedFavorites = useMemo(() => {
-    console.log("Filtered Favorites: ", filteredFavorites); // add this line
     switch (sortBy) {
       case "Newest":
         return sortFavoritesByDate(filteredFavorites);
@@ -123,8 +122,8 @@ export default function FavoritesPage() {
 		  <div className="ingredients-content">
 			<h1>Favorites Filter</h1>
 			<div className="add-ingredient-section">
-			  <label htmlFor="sort-by-select">Sort:</label>
 			  <div className="sort-by-container">
+			  	<label htmlFor="sort-by-select">Sort:</label>
 				<select id="sort-by-select" value={sortBy} onChange={handleSortChange}>
 				  <option value="Newest">Newest</option>
 				  <option value="Oldest">Oldest</option>
@@ -132,7 +131,7 @@ export default function FavoritesPage() {
 			  </div>
 			</div>
   
-			<label htmlFor="add-ingredient-field">Add Ingredient</label>
+			<label htmlFor="add-ingredient-field">Search Ingredient</label>
 			<div className="add-ingredient-section">
 			  <input
 				id="add-ingredient-field"
