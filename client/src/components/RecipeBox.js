@@ -54,6 +54,7 @@ export default function RecipeBox({ recipe }) {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
+						userID: auth.user.id,
 						recipeID: recipeID,
 					}),
 				});
