@@ -69,10 +69,11 @@ export default function FavoritesPage() {
   const filteredFavorites = favorites.filter((favorite) =>
     ingredients.every((ingredient) =>
       favorite.ingredients.some((favIngredient) =>
-        favIngredient.includes(ingredient)
+        favIngredient.toLowerCase().includes(ingredient.toLowerCase())
       )
     )
   );
+
 
   const sortedFavorites = useMemo(() => {
     switch (sortBy) {
