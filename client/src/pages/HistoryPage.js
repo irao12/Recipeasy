@@ -15,19 +15,18 @@ export default function HistoryPage() {
       }
       response.json().then((history) => {
         setHistory(history);
-        setFilteredHistory(history); 
+        setFilteredHistory(history);
       });
     });
   };
 
-
-  // can improve by disregarding 1 character for human flaw (typo)
   const searchHistory = (searchString) => {
     if (!searchString) {
-      return history; 
+      return history;
     }
-    return history.filter((hist) => 
-			hist.title.toLowerCase().includes(searchString.toLowerCase()));
+    return history.filter((hist) =>
+      hist.title.toLowerCase().includes(searchString.toLowerCase())
+    );
   };
 
   const onSearch = (event) => {
@@ -36,11 +35,34 @@ export default function HistoryPage() {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.toLocaleString("default", { month: "short" });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
+
+  const combineIngredients = (ingredients) => {
+    const MAX_LENGTH = 26; // counted from figma (change if needed)
+    let result = "";
+    for (let i = 0; i < ingredients.length; i++) {
+      const capitalizedIngredient =
+        ingredients[i].charAt(0).toUpperCase() + ingredients[i].slice(1);
+      if (result.length + capitalizedIngredient.length > MAX_LENGTH) {
+        result += "& More.";
+        break;
+      } else {
+        result += capitalizedIngredient + ", ";
+      }
+    }
+    return result;
+  };
+
   useEffect(() => {
-	console.log(history);
+    console.log(history);
     getHistory();
   }, []);
-
 
   return (
     <div className="history-page">
@@ -48,17 +70,34 @@ export default function HistoryPage() {
         <h1>History</h1>
 
         <div className="history-box">
-			<div className="search-box">
-				<input
-					type="text"
-					placeholder="Search Recipes"
-					value={searchInput}
-					onChange={(event) => setSearchInput(event.target.value)}
-					onKeyPress={onSearch} 
-				/>
-			</div>
-          {filteredHistory.map((hist) => (
-            <div key={hist.id}>{hist.title}</div>
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search Recipes"
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+              onKeyPress={onSearch}
+            />
+          </div>
+
+          {filteredHistory.map((items, index) => (
+            <div key={items.id}>
+              <input type="checkbox" value={items.title} />
+              {items.title}
+              <img className="recipe-image" src={items.imageURL} />
+              {formatDate(items.updatedAt)}
+              {combineIngredients(items.ingredients)}
+              <button
+                onClick={() => {
+                  const newHistory = [...history];
+                  newHistory.splice(index, 1);
+                  setHistory(newHistory);
+                  setFilteredHistory(searchHistory(searchInput));
+                }}
+              >
+                x
+              </button>
+            </div>
           ))}
         </div>
       </div>

@@ -48,3 +48,8 @@
 .search-box input::placeholder {
     color: rgba(0, 0, 0, 0.497);
 }
+
+.history-box img{
+    width: 41px;
+    width: 51px;
+}
