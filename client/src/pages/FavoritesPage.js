@@ -34,9 +34,13 @@ export default function FavoritesPage() {
   };
 
   const deleteIngredient = (index) => {
-    const newIngredients = [...ingredients];
-    newIngredients.splice(index, 1);
-    setIngredients(newIngredients);
+    if (index === -1) {
+      setIngredients([]);
+    } else {
+      const newIngredients = [...ingredients];
+      newIngredients.splice(index, 1);
+      setIngredients(newIngredients);
+    }
   };
 
   const mapFavoriteToRecipe = (favorite) => ({
@@ -74,7 +78,6 @@ export default function FavoritesPage() {
     )
   );
 
-
   const sortedFavorites = useMemo(() => {
     switch (sortBy) {
       case "Newest":
@@ -101,78 +104,88 @@ export default function FavoritesPage() {
     }
   };
 
+
   useEffect(() => {
     getFavorites();
   }, [auth.user.id]);
 
-
-  
   return (
-	<div className="favorites-page">
-	  <div className="favorites-content">
-		<div className="favorites-results">
-		  <h1>Favorites</h1>
-		  <div className="recipes-container">
-			{sortedFavorites.map((favorite) => (
-			  <RecipeBox key={favorite.id} recipe={mapFavoriteToRecipe(favorite)} />
-			))}
-		  </div>
-		</div>
-  
-		<div className="ingredients-container">
-		  <div className="ingredients-content">
-			<h1>Favorites Filter</h1>
-			<div className="add-ingredient-section">
-			  <div className="sort-by-container">
-			  	<label htmlFor="sort-by-select">Sort:</label>
-				<select id="sort-by-select" value={sortBy} onChange={handleSortChange}>
-				  <option value="Newest">Newest</option>
-				  <option value="Oldest">Oldest</option>
-				</select>
-			  </div>
-			</div>
-  
-			<label htmlFor="add-ingredient-field">Search Ingredient</label>
-			<div className="add-ingredient-section">
-			  <input
-				id="add-ingredient-field"
-				type="text"
-				value={ingredientInput}
-				onChange={handleInputChange}
-				onKeyDown={handleEnterKey}
-			  />
-			  <button
-				className="add-ingredient-button"
-				onClick={() => {
-				  addIngredient(ingredientInput);
-				  setIngredientInput("");
-				}}
-			  >
-				+
-			  </button>
-			</div>
-			<ul className="ingredients-list">
-			  {ingredients.map((ingredient, index) => {
-				return (
-				  <li key={index} className="ingredient">
-					<p onClick={() => { deleteIngredient(index); }}>
-					  - {ingredient}
-					</p>
-				  </li>
-				);
-			  })}
-			</ul>
-  
-			<button
-			  className="find-recipes-button"
-			  type="button"
-			  onClick={getFavorites}
-			>
-			  Favorites
-			</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
+    <div className="favorites-page">
+      <div className="favorites-content">
+        <div className="favorites-results">
+          <h1>Favorites</h1>
+          <div className="recipes-container">
+            {sortedFavorites.map((favorite) => (
+              <RecipeBox
+                key={favorite.id}
+                recipe={mapFavoriteToRecipe(favorite)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="ingredients-container">
+          <div className="ingredients-content">
+            <h1>Favorites Filter</h1>
+            <div className="add-ingredient-section">
+              <div className="sort-by-container">
+                <label htmlFor="sort-by-select">Sort:</label>
+                <select
+                  id="sort-by-select"
+                  value={sortBy}
+                  onChange={handleSortChange}
+                >
+                  <option value="Newest">Newest</option>
+                  <option value="Oldest">Oldest</option>
+                </select>
+              </div>
+            </div>
+
+            <label htmlFor="add-ingredient-field">Search Ingredient</label>
+            <div className="add-ingredient-section">
+              <input
+                id="add-ingredient-field"
+                type="text"
+                value={ingredientInput}
+                onChange={handleInputChange}
+                onKeyDown={handleEnterKey}
+              />
+              <button
+                className="add-ingredient-button"
+                onClick={() => {
+                  addIngredient(ingredientInput);
+                  setIngredientInput("");
+                }}
+              >
+                +
+              </button>
+            </div>
+            <ul className="ingredients-list">
+              {ingredients.map((ingredient, index) => {
+                return (
+                  <li key={index} className="ingredient">
+                    <p
+                      onClick={() => {
+                        deleteIngredient(index);
+                      }}
+                    >
+                      - {ingredient}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <button
+              className="find-recipes-button"
+              type="button"
+              onClick={() => deleteIngredient(-1)}
+            >
+              Remove All
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}  
+}
