@@ -12,6 +12,12 @@
 	width: min(90%, 45rem);
 	border-radius: 5rem;
 	box-shadow: 0rem 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
+	animation: fadeInUp 1s;
+}
+
+@keyframes fadeInUp {
+	0% { opacity: 0; transform: translateY(5rem); }
+	100% { opacity: 1; transform: translateY(0rem); }
 }
 
 .sign-up-form-section {
@@ -76,16 +82,17 @@
 
 .sign-up-button {
 	flex-shrink: 0;
-	width: 17rem;
+	width: 18rem;
 	height: 5rem;
-	margin: 0 auto;
+	margin: auto;
 	background-color: #76afa7;
 	color: white;
 	border: none;
-	border-radius: 1rem;
-	font-size: 2rem;
+	border-radius: 1.5rem;
+	font-size: 3rem;
 	cursor: pointer;
 	margin-bottom: 2.4rem;
+	font-family: "Father-Farmhouse-Sans";
 }
 
 .sign-up-button:hover {

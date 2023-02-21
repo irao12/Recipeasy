@@ -11,6 +11,8 @@
 	border: 1.5rem solid #76afa7;
 	border-radius: 1rem;
 	background-color: #76afa7;
+	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
+	animation: fadeIn 2s ease-out;
 }
 
 .recipe-page .recipe-content {
@@ -19,6 +21,8 @@
 	height: 100%;
 	display: flex;
 	font-family: "Kumbh-Sans";
+	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
+	animation: fadeIn 1.5s;
 }
 
 .recipe-page .recipe-info {

@@ -27,6 +27,7 @@
     font-family: "Kumbh-Sans";
     font-size: 4rem;
     font-weight: 400;
+    animation: fadeInRight 1s;
 }
 
 .ingredients-content > h1 {

@@ -7,6 +7,7 @@
 .landing-page-content {
     margin: auto;
     padding: 5rem;
+    animation: fadeInUp 1.5s;
 }
 
 .landing-page-content h1 {

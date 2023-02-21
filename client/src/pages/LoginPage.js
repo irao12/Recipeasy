@@ -62,7 +62,7 @@ export default function LoginPage() {
 
 		auth.authenticate(inputs.email, inputs.password)
 			.then((user) => {
-				navigate("/");
+				navigate("/findrecipes");
 			})
 			.catch((error) => {
 				setErrorMessage(error.message);
