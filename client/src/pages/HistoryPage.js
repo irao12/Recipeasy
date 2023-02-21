@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import HeartUnfilled from "../assets/icons/heart_unfilled.svg";
+import HeartFilled from "../assets/icons/heart_filled.svg";
 import "./HistoryPage.css";
+import HistoryBox from "../components/HistoryBox";
+
 
 export default function HistoryPage() {
   const auth = useContext(AuthContext);
@@ -8,6 +12,7 @@ export default function HistoryPage() {
   const [searchInput, setSearchInput] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
 
+  
   const getHistory = () => {
     fetch(`/api/history/`).then((response) => {
       if (!response.ok) {
@@ -35,30 +40,6 @@ export default function HistoryPage() {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = date.toLocaleString("default", { month: "short" });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return `${month} ${day}, ${year}`;
-  };
-
-  const combineIngredients = (ingredients) => {
-    const MAX_LENGTH = 26; // counted from figma (change if needed)
-    let result = "";
-    for (let i = 0; i < ingredients.length; i++) {
-      const capitalizedIngredient =
-        ingredients[i].charAt(0).toUpperCase() + ingredients[i].slice(1);
-      if (result.length + capitalizedIngredient.length > MAX_LENGTH) {
-        result += "& More.";
-        break;
-      } else {
-        result += capitalizedIngredient + ", ";
-      }
-    }
-    return result;
-  };
-
   useEffect(() => {
     console.log(history);
     getHistory();
@@ -80,24 +61,8 @@ export default function HistoryPage() {
             />
           </div>
 
-          {filteredHistory.map((items, index) => (
-            <div key={items.id}>
-              <input type="checkbox" value={items.title} />
-              {items.title}
-              <img className="recipe-image" src={items.imageURL} />
-              {formatDate(items.updatedAt)}
-              {combineIngredients(items.ingredients)}
-              <button
-                onClick={() => {
-                  const newHistory = [...history];
-                  newHistory.splice(index, 1);
-                  setHistory(newHistory);
-                  setFilteredHistory(searchHistory(searchInput));
-                }}
-              >
-                x
-              </button>
-            </div>
+          {filteredHistory.map((item) => (
+            <HistoryBox key={item.id} item={item} />
           ))}
         </div>
       </div>
