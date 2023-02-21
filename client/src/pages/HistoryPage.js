@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import HeartUnfilled from "../assets/icons/heart_unfilled.svg";
-import HeartFilled from "../assets/icons/heart_filled.svg";
 import "./HistoryPage.css";
 import HistoryBox from "../components/HistoryBox";
-
 
 export default function HistoryPage() {
   const auth = useContext(AuthContext);
@@ -12,7 +9,6 @@ export default function HistoryPage() {
   const [searchInput, setSearchInput] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
 
-  
   const getHistory = () => {
     fetch(`/api/history/`).then((response) => {
       if (!response.ok) {
@@ -40,10 +36,44 @@ export default function HistoryPage() {
     }
   };
 
+  const onDelete = (id) => {
+    setHistory((prevHistory) => prevHistory.filter((item) => item.id !== id));
+  };
+  
+  /*
+  const onDelete = (id) => {
+    fetch(`/api/history/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("failed to delete item");
+        }
+        setHistory((prevHistory) =>
+          prevHistory.filter((item) => item.id !== id)
+        );
+        setFilteredHistory((prevFilteredHistory) =>
+          prevFilteredHistory.filter((item) => item.id !== id)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  */
+
   useEffect(() => {
     console.log(history);
     getHistory();
   }, []);
+
+  useEffect(() => {
+    setFilteredHistory(searchHistory(searchInput));
+  }, [history, searchInput]);
 
   return (
     <div className="history-page">
@@ -62,7 +92,11 @@ export default function HistoryPage() {
           </div>
 
           {filteredHistory.map((item) => (
-            <HistoryBox key={item.id} item={item} />
+            <HistoryBox
+              key={item.id}
+              item={item}
+              onDelete={() => onDelete(item.id)}
+            />
           ))}
         </div>
       </div>
