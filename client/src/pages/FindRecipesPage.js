@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import RecipeBox from "../components/RecipeBox";
-import { AuthContext } from "../context/AuthContext";
 import { RecipesContext } from "../context/RecipesContext";
 import "./FindRecipesPage.css";
 const KEY = process.env.REACT_APP_API_KEY;
@@ -8,6 +7,7 @@ const KEY = process.env.REACT_APP_API_KEY;
 export default function FindRecipesPage() {
 	const [ingredients, setIngredients] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
+	const [ingredientsChanged, setIngredientsChanged] = useState(false);
 
 	const recipeContext = useContext(RecipesContext);
 
@@ -61,6 +61,8 @@ export default function FindRecipesPage() {
 			updateList(oldIngredientsCopy);
 			return oldIngredientsCopy;
 		});
+
+		setIngredientsChanged(true);
 	};
 
 	const deleteIngredient = (index) => {
@@ -70,12 +72,14 @@ export default function FindRecipesPage() {
 			updateList(oldIngredientsCopy);
 			return oldIngredientsCopy;
 		});
+		setIngredientsChanged(true);
 	};
 
-	const getRecipes = () => {
+	const getRecipes = (count) => {
+		console.log(count);
 		const ingredientsList = ingredients.join(",");
 		const apiURL =
-			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList}&ranking=2&apiKey=${KEY}`.replaceAll(
+			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList}&number=${count}&ranking=2&apiKey=${KEY}`.replaceAll(
 				" ",
 				"_"
 			);
@@ -87,6 +91,7 @@ export default function FindRecipesPage() {
 				recipeContext.setRecipeResults(results);
 			});
 		});
+		setIngredientsChanged(false);
 	};
 
 	return (
@@ -100,6 +105,24 @@ export default function FindRecipesPage() {
 								<RecipeBox key={recipe.index} recipe={recipe} />
 							);
 						})}
+						{recipeContext.recipeCount > 0 &&
+							recipeContext.recipeCount < 100 &&
+							!ingredientsChanged && (
+								<div className="find-more-box">
+									<button
+										onClick={() => {
+											const count = Math.min(
+												100,
+												recipeContext.recipeCount + 10
+											);
+											getRecipes(count);
+										}}
+										className="find-more-button"
+									>
+										Find More
+									</button>
+								</div>
+							)}
 					</div>
 				</div>
 				<div className="ingredients-container">
@@ -146,7 +169,9 @@ export default function FindRecipesPage() {
 						<button
 							className="find-recipes-button"
 							type="button"
-							onClick={getRecipes}
+							onClick={() => {
+								getRecipes(10);
+							}}
 						>
 							FIND RECIPES
 						</button>
