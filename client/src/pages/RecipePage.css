@@ -158,6 +158,7 @@
 	.recipe-page .recipe-wrapper {
 		display: flex;
 		height: fit-content;
+		margin-top: 4em;
 	}
 
 	.recipe-ingredients .ingredients {
