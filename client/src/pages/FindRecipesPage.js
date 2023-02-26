@@ -7,7 +7,6 @@ export default function FindRecipesPage() {
 	const [ingredients, setIngredients] = useState([]);
 	const [recipes, setRecipes] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
-
 	useEffect(() => {
 		fetch("/api/ingredientlist")
 			.then((response) => {

@@ -24,11 +24,9 @@ export default function Navbar() {
 				<li className="nav-link">
 					<Link to="/findrecipes">Find Recipes</Link>
 				</li>
-				<div className="nav-border"></div>
 				<li className="nav-link">
 					<Link to="/favorites">Favorites</Link>
 				</li>
-				<div className="nav-border"></div>
 
 				<li className="nav-link">
 					{auth.isAuthenticated ? (
@@ -40,8 +38,6 @@ export default function Navbar() {
 
 				{auth.isAuthenticated && (
 					<>
-						<div className="nav-border"></div>
-
 						<li
 							title="Log Out"
 							onClick={() => {

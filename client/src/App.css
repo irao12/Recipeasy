@@ -10,7 +10,7 @@
 
 @font-face {
 	font-family: "Kristen-ITC";
-	src: url("./assets/fonts/ITCKRIST.ttf")
+	src: url("./assets/fonts/ITCKRIST.ttf");
 }
 
 @font-face {
@@ -36,8 +36,8 @@
 	--seashell: #f7ebe8;
 	--navbar-height: 10rem;
 	--dark-green: #1a3b2d;
-	--pink: #C37D92;
-	--green-sheen: #76AFA7;
+	--pink: #c37d92;
+	--green-sheen: #76afa7;
 }
 
 html,
