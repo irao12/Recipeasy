@@ -30,8 +30,11 @@ nav .nav-links {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 2rem;
 	list-style: none;
+}
+
+nav .nav-link {
+	margin-bottom: 2rem;
 }
 
 nav a:visited,
@@ -64,6 +67,17 @@ nav a:link {
 		flex-direction: row;
 		margin-top: 0rem;
 	}
+	nav .nav-link {
+		padding-left: 1.6rem;
+		padding-right: 1.6rem;
+		border-right: 2px solid white;
+		margin-bottom: 0;
+	}
+
+	nav .log-out {
+		margin-left: 1.6rem;
+	}
+
 	nav .logo-spoon {
 		width: 6rem;
 		margin-right: 0.8rem;
