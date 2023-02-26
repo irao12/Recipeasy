@@ -40,8 +40,6 @@ export default function RecipePage() {
 			method: "GET",
 		}).then((response) => {
 			response.json().then((results) => {
-				console.log(results);
-
 				setRecipe({
 					title: results.title,
 					imageURL: results.image,
@@ -170,9 +168,15 @@ export default function RecipePage() {
 									Ingredients
 								</h3>
 								<ul className="ingredients">
-									{recipe.ingredients.map((ingredient) => {
-										return <li>&#8226; {ingredient}</li>;
-									})}
+									{recipe.ingredients.map(
+										(ingredient, index) => {
+											return (
+												<li key={index}>
+													&#8226; {ingredient}
+												</li>
+											);
+										}
+									)}
 								</ul>
 							</div>
 							<div className="recipe-steps">

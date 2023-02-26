@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RecipeBox from "../components/RecipeBox";
+import { AuthContext } from "../context/AuthContext";
+import { RecipesContext } from "../context/RecipesContext";
 import "./FindRecipesPage.css";
 const KEY = process.env.REACT_APP_API_KEY;
 
 export default function FindRecipesPage() {
 	const [ingredients, setIngredients] = useState([]);
-	const [recipes, setRecipes] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
+
+	const recipeContext = useContext(RecipesContext);
+
 	useEffect(() => {
 		fetch("/api/ingredientlist")
 			.then((response) => {
@@ -80,8 +84,7 @@ export default function FindRecipesPage() {
 			method: "GET",
 		}).then((response) => {
 			response.json().then((results) => {
-				setRecipes(results);
-				console.log(results);
+				recipeContext.setRecipeResults(results);
 			});
 		});
 	};
@@ -92,7 +95,7 @@ export default function FindRecipesPage() {
 				<div className="find-recipes-results">
 					<h1>Find Recipes</h1>
 					<div className="recipes-container">
-						{recipes.map((recipe, index) => {
+						{recipeContext.getRecipes().map((recipe, index) => {
 							return (
 								<RecipeBox key={recipe.index} recipe={recipe} />
 							);
