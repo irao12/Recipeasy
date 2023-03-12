@@ -39,6 +39,19 @@ const AuthProvider = ({ children }) => {
 			});
 	};
 
+	const refresh = () => {
+		fetch("/api/auth/login")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Unauthenticated");
+				}
+
+				return response.json();
+			})
+			.then((body) => setUser(body))
+			.catch((error) => setUser(false));
+	};
+
 	const signout = () => {
 		return fetch("api/auth/logout", {
 			method: "POST",
@@ -73,6 +86,7 @@ const AuthProvider = ({ children }) => {
 				signout,
 				getExperience: getExperienceFromLevel,
 				getLevel: getLevelFromExperience,
+				refresh: refresh,
 				user,
 				isAuthenticated: user ? true : false,
 				experience: user.experience,

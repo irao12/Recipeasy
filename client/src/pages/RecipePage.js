@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HeartUnfilled from "../assets/icons/heart_unfilled.svg";
 import HeartFilled from "../assets/icons/heart_filled.svg";
+import ExperienceModal from "../components/ExperienceModal";
 import "./RecipePage.css";
 import { AuthContext } from "../context/AuthContext";
 
@@ -14,6 +15,8 @@ export default function RecipePage() {
 	const [isFavorited, setIsFavorited] = useState(false);
 	const [recipe, setRecipe] = useState({});
 	const [isCompleted, setIsCompleted] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [expGained, setExpGained] = useState(0);
 
 	const checkFavorite = () => {
 		fetch(`/api/favorite/?userID=${auth.user.id}&recipeID=${recipeID}`, {
@@ -114,7 +117,10 @@ export default function RecipePage() {
 			if (!response.ok) {
 				throw new Error("failed to complete");
 			}
+			response.json().then((results) => setExpGained(results.expGained));
+			auth.refresh();
 			setIsCompleted(true);
+			setShowModal(true);
 		});
 	};
 
@@ -128,6 +134,12 @@ export default function RecipePage() {
 
 	return (
 		<div className="recipe-page">
+			{showModal && (
+				<ExperienceModal
+					expGained={expGained}
+					setShowModal={setShowModal}
+				/>
+			)}
 			<div className="recipe-wrapper">
 				{!isLoading && (
 					<div className="recipe-content">

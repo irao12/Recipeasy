@@ -2,6 +2,7 @@
 	height: calc(100% - var(--navbar-height));
 	width: 100%;
 	display: flex;
+	position: relative;
 }
 
 .recipe-page .recipe-wrapper {
@@ -138,9 +139,12 @@
 	cursor: pointer;
 }
 
-.complete-recipe-button .invalid {
-	color: gray;
+.recipe-page .complete-recipe-button.inactive {
+	color: rgb(0, 0, 0);
+	background-color: rgb(211, 209, 209);
+	pointer-events: none;
 }
+
 @media screen and (max-width: 800px) {
 	.recipe-page .recipe-content {
 		flex-direction: column;
