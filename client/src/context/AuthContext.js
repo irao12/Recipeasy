@@ -5,6 +5,7 @@ const { Provider } = AuthContext;
 
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(false);
+	const [ingredientList, setIngredientList] = useState([]);
 
 	useEffect(() => {
 		fetch("/api/auth/login")
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
 			})
 			.then((body) => setUser(body))
 			.catch((error) => setUser(false));
+		getIngredientList();
 	}, []);
 
 	const authenticate = (email, password) => {
@@ -39,19 +41,6 @@ const AuthProvider = ({ children }) => {
 			});
 	};
 
-	const refresh = () => {
-		fetch("/api/auth/login")
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Unauthenticated");
-				}
-
-				return response.json();
-			})
-			.then((body) => setUser(body))
-			.catch((error) => setUser(false));
-	};
-
 	const signout = () => {
 		return fetch("api/auth/logout", {
 			method: "POST",
@@ -71,12 +60,40 @@ const AuthProvider = ({ children }) => {
 			});
 	};
 
+	const refresh = () => {
+		fetch("/api/auth/login")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Unauthenticated");
+				}
+
+				return response.json();
+			})
+			.then((body) => setUser(body))
+			.catch((error) => setUser(false));
+	};
+
 	const getExperienceFromLevel = (level) => {
 		return Math.pow(level / 0.5, 2);
 	};
 
 	const getLevelFromExperience = () => {
 		return Math.floor(Math.sqrt(user.experience) * 0.5);
+	};
+
+	const getIngredientList = () => {
+		fetch("/api/ingredientlist/")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Unauthenticated");
+				}
+
+				return response.json();
+			})
+			.then((body) => {
+				setIngredientList(body.ingredients);
+			})
+			.catch((error) => setUser(false));
 	};
 
 	return (
@@ -87,6 +104,8 @@ const AuthProvider = ({ children }) => {
 				getExperience: getExperienceFromLevel,
 				getLevel: getLevelFromExperience,
 				refresh: refresh,
+				getIngredientList: getIngredientList,
+				ingredientList,
 				user,
 				isAuthenticated: user ? true : false,
 				experience: user.experience,

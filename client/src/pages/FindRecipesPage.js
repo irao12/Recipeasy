@@ -1,10 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import RecipeBox from "../components/RecipeBox";
+import { AuthContext } from "../context/AuthContext";
 import { RecipesContext } from "../context/RecipesContext";
 import "./FindRecipesPage.css";
 const KEY = process.env.REACT_APP_API_KEY;
 
 export default function FindRecipesPage() {
+	const auth = useContext(AuthContext);
+
 	const [ingredients, setIngredients] = useState([]);
 	const [ingredientInput, setIngredientInput] = useState("");
 	const [ingredientsChanged, setIngredientsChanged] = useState(false);
@@ -12,15 +15,7 @@ export default function FindRecipesPage() {
 	const recipeContext = useContext(RecipesContext);
 
 	useEffect(() => {
-		fetch("/api/ingredientlist")
-			.then((response) => {
-				response.json().then((list) => {
-					setIngredients(list.ingredients);
-				});
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
+		setIngredients(auth.ingredientList);
 	}, []);
 
 	const updateList = (newIngredients) => {
@@ -33,6 +28,7 @@ export default function FindRecipesPage() {
 				ingredients: newIngredients,
 			}),
 		});
+		auth.getIngredientList();
 	};
 
 	const handleInputChange = (event) => {
