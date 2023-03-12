@@ -58,13 +58,24 @@ const AuthProvider = ({ children }) => {
 			});
 	};
 
+	const getExperienceFromLevel = (level) => {
+		return Math.pow(level / 0.5, 2);
+	};
+
+	const getLevelFromExperience = () => {
+		return Math.floor(Math.sqrt(user.experience) * 0.5);
+	};
+
 	return (
 		<Provider
 			value={{
 				authenticate,
 				signout,
+				getExperience: getExperienceFromLevel,
+				getLevel: getLevelFromExperience,
 				user,
 				isAuthenticated: user ? true : false,
+				experience: user.experience,
 			}}
 		>
 			{children}

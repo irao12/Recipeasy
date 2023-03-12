@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
 					},
 				},
 			},
+			experience: {
+				type: DataTypes.INTEGER,
+				defaultValue: 0,
+			},
 		},
 		{
 			sequelize,
