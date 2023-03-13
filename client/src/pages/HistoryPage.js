@@ -8,6 +8,7 @@ export default function HistoryPage() {
   const [history, setHistory] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
 
   const getHistory = () => {
     fetch(`/api/history/`).then((response) => {
@@ -39,35 +40,24 @@ export default function HistoryPage() {
   const onDelete = (id) => {
     setHistory((prevHistory) => prevHistory.filter((item) => item.id !== id));
   };
-  
-  /*
-  const onDelete = (id) => {
-    fetch(`/api/history/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("failed to delete item");
-        }
-        setHistory((prevHistory) =>
-          prevHistory.filter((item) => item.id !== id)
-        );
-        setFilteredHistory((prevFilteredHistory) =>
-          prevFilteredHistory.filter((item) => item.id !== id)
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+  const onCheckboxChange = (event) => {
+    const checkboxes = document.querySelectorAll(
+      'input[type="checkbox"]:checked'
+    );
+    const checkedIds = Array.from(checkboxes).map((checkbox) => checkbox.value);
+    setCheckedItems(checkedIds);
   };
-  */
+
+  const onDeleteChecked = () => {
+    const newFilteredHistory = filteredHistory.filter(
+      (item) => !checkedItems.includes(item.title)
+    );
+    setFilteredHistory(newFilteredHistory);
+    setCheckedItems([]);
+  };
 
   useEffect(() => {
-    console.log(history);
     getHistory();
   }, []);
 
@@ -89,6 +79,11 @@ export default function HistoryPage() {
               onChange={(event) => setSearchInput(event.target.value)}
               onKeyPress={onSearch}
             />
+            {checkedItems.length > 0 && (
+              <button className="green-button" onClick={onDeleteChecked}>
+                Delete Checked
+              </button>
+            )}
           </div>
 
           {filteredHistory.map((item) => (
@@ -96,6 +91,7 @@ export default function HistoryPage() {
               key={item.id}
               item={item}
               onDelete={() => onDelete(item.id)}
+              onCheckboxChange={onCheckboxChange}
             />
           ))}
         </div>

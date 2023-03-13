@@ -1,7 +1,8 @@
 import React from "react";
+import xMark from "../assets/icons/x_button.svg";
 import "./HistoryBox.css";
 
-function HistoryBox({ item, onDelete }) {
+function HistoryBox({ item, onDelete, onCheckboxChange }) {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.toLocaleString("default", { month: "short" });
@@ -48,7 +49,7 @@ function HistoryBox({ item, onDelete }) {
 
   return (
     <div key={item.id} className="recipe-container">
-      <input type="checkbox" value={item.title} />
+      <input type="checkbox" value={item.title} onChange={onCheckboxChange} />
       <img className="recipe-image" src={item.imageURL} alt={item.title} />
       <div className="recipe-details">
         <p> {shortenString(item.title, 17, "...")} </p>
@@ -57,7 +58,7 @@ function HistoryBox({ item, onDelete }) {
           <span>{formatDate(item.updatedAt)}</span>
         </div>
       </div>
-      <button onClick={onDelete}>x</button>
+      <img className="delete" src={xMark} alt="delete" onClick={onDelete} />
     </div>
   );
 }
