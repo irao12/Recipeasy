@@ -34,7 +34,7 @@
 .search-box {
     display: flex;
     justify-content:space-between;
-    margin: 4rem 4rem 0 4rem;
+    margin: 4rem 4rem 1rem 4rem;
     height: 10%;
     z-index: 1;
 }

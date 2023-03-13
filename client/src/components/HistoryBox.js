@@ -61,16 +61,20 @@ function HistoryBox({ item, onDelete, onCheckboxChange }) {
       className={`recipe-container${isDeleting ? " deleting" : ""}`}
       onAnimationEnd={() => setIsDeleting(false)}
     >
-      <input type="checkbox" value={item.title} onChange={onCheckboxChange} />
-      <img className="recipe-image" src={item.imageURL} alt={item.title} />
-      <div className="recipe-details">
-        <p> {shortenString(item.title, 17, "...")} </p>
-        <div className="recipe-ingredients">
-          <span>{shortenList(item.ingredients, 26)}</span>
-          <span>{formatDate(item.updatedAt)}</span>
+        <div className="recipe-wrapper">
+        <input type="checkbox" value={item.id} onChange={onCheckboxChange} />
+        <img className="recipe-image-hist" src={item.imageURL} alt={item.title} />
+        <div className="recipe-details">
+            <p>{shortenString(item.title, 17, "...")}</p>
+            <div className="recipe-ingredients">
+            <span>{shortenList(item.ingredients, 26)}</span>
+            <span>{formatDate(item.updatedAt)}</span>
+            </div>
         </div>
-      </div>
-      <img className="delete" src={xMark} onClick={handleDelete}></img>
+        <div></div>
+        <img className="delete" src={xMark} onClick={handleDelete}></img>
+        </div>
+
     </div>
   );
 }

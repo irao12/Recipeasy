@@ -41,14 +41,32 @@ export default function HistoryPage() {
   };
 
   const onDelete = (id) => {
-    setHistory((prevHistory) => prevHistory.filter((item) => item.id !== id));
+    fetch(`/api/history/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        historyID: id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        setHistory((prevHistory) =>
+          prevHistory.filter((item) => item.id !== id)
+        );
+      } else {
+        console.log("Failed to delete item from database.");
+      }
+    });
   };
+  
 
   const onCheckboxChange = (event) => {
     const checkboxes = document.querySelectorAll(
       'input[type="checkbox"]:checked'
     );
-    const checkedIds = Array.from(checkboxes).map((checkbox) => checkbox.value);
+    const checkedIds = Array.from(checkboxes).map((checkbox) => checkbox.id);
+    console.log(checkedIds);
     setCheckedItems(checkedIds);
   };
 
@@ -109,3 +127,4 @@ export default function HistoryPage() {
     </div>
   );
 }
+//
