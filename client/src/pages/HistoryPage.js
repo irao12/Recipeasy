@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import trashcan from "../assets/icons/trashcan.svg";
+import trashcan_empty from "../assets/icons/trashcan_empty.svg";
+
 import "./HistoryPage.css";
 import HistoryBox from "../components/HistoryBox";
 
@@ -80,9 +83,15 @@ export default function HistoryPage() {
               onKeyPress={onSearch}
             />
             {checkedItems.length > 0 && (
-              <button className="green-button" onClick={onDeleteChecked}>
-                Delete Checked
-              </button>
+                <button class="multi-delete" onClick={onDeleteChecked}>
+                  <span class="trash-filled">
+                    <img src={trashcan}></img>
+                  </span>
+                  <span class="trash-empty">
+                    <img src={trashcan_empty}></img>
+                  </span>
+                  <span>Delete</span>
+                </button>
             )}
           </div>
 

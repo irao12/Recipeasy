@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import xMark from "../assets/icons/x_button.svg";
 import "./HistoryBox.css";
 
 function HistoryBox({ item, onDelete, onCheckboxChange }) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.toLocaleString("default", { month: "short" });
@@ -47,8 +49,18 @@ function HistoryBox({ item, onDelete, onCheckboxChange }) {
     return result;
   };
 
+  const handleDelete = () => {
+    setIsDeleting(true);
+    //setTimeout(() => onDelete(item.id), 500);
+    onDelete(item.id);
+  };
+
   return (
-    <div key={item.id} className="recipe-container">
+    <div
+      key={item.id}
+      className={`recipe-container${isDeleting ? " deleting" : ""}`}
+      onAnimationEnd={() => setIsDeleting(false)}
+    >
       <input type="checkbox" value={item.title} onChange={onCheckboxChange} />
       <img className="recipe-image" src={item.imageURL} alt={item.title} />
       <div className="recipe-details">
@@ -58,7 +70,7 @@ function HistoryBox({ item, onDelete, onCheckboxChange }) {
           <span>{formatDate(item.updatedAt)}</span>
         </div>
       </div>
-      <img className="delete" src={xMark} alt="delete" onClick={onDelete} />
+      <img className="delete" src={xMark} onClick={handleDelete}></img>
     </div>
   );
 }
