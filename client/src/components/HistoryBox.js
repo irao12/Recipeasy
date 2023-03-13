@@ -49,14 +49,14 @@ function HistoryBox({ item, onDelete }) {
   return (
     <div key={item.id} className="recipe-container">
       <input type="checkbox" value={item.title} />
+      <img className="recipe-image" src={item.imageURL} alt={item.title} />
       <div className="recipe-details">
-        {shortenString(item.title, 17, "...")}
+        <p> {shortenString(item.title, 17, "...")} </p>
         <div className="recipe-ingredients">
-          {shortenList(item.ingredients, 26)}
+          <span>{shortenList(item.ingredients, 26)}</span>
+          <span>{formatDate(item.updatedAt)}</span>
         </div>
       </div>
-      <img className="recipe-image" src={item.imageURL} alt={item.title} />
-      {formatDate(item.updatedAt)}
       <button onClick={onDelete}>x</button>
     </div>
   );

@@ -39,8 +39,8 @@
 .search-box input{
     font-family: "Kumbh-Sans";
     width: 55%;
-    height: 75%;
-    border-radius: 0.5rem;
+    height: 85%;
+    border-radius: 1rem;
     padding-left: 0.75rem;
     font-size: 1.25rem;
 }
