@@ -94,15 +94,16 @@ export default function HistoryPage() {
                 </button>
             )}
           </div>
-
-          {filteredHistory.map((item) => (
-            <HistoryBox
-              key={item.id}
-              item={item}
-              onDelete={() => onDelete(item.id)}
-              onCheckboxChange={onCheckboxChange}
-            />
-          ))}
+          <div className="history-items">
+            {filteredHistory.map((item) => (
+              <HistoryBox
+                key={item.id}
+                item={item}
+                onDelete={() => onDelete(item.id)}
+                onCheckboxChange={onCheckboxChange}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
