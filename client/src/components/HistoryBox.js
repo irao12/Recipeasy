@@ -51,9 +51,9 @@ function HistoryBox({ item, onDelete, onCheckboxChange }) {
 
   const handleDelete = () => {
     setIsDeleting(true);
-    //setTimeout(() => onDelete(item.id), 500);
-    onDelete(item.id);
+    setTimeout(() => onDelete(item.id), 2000); // Change the delay time to match the animation duration
   };
+  
 
   return (
     <div

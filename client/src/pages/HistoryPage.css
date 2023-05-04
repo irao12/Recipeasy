@@ -126,3 +126,67 @@
   }
   
   
+
+  .history-content {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInFromBelow 1s forwards ease-in-out;
+}
+
+.history-box {
+  opacity: 0;
+  transform: scale(0);
+  animation: fadeInAndScale 0.5s forwards ease-in-out;
+}
+
+.search-box input {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeInFromLeft 0.5s forwards ease-in-out;
+}
+
+.multi-delete {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInFromBelow 1s forwards ease-in-out;
+}
+
+.empty-state {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInFromBelow 1s forwards ease-in-out;
+}
+
+/* Define keyframe animations */
+@keyframes fadeInFromBelow {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInAndScale {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
