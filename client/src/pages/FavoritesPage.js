@@ -97,7 +97,6 @@ export default function FavoritesPage() {
     try {
       const response = await fetch(`/api/favorite/all`);
       const favorites = await response.json();
-      console.log("Init Fav: ", favorites);
       setFavorites(favorites);
     } catch (error) {
       console.log(error);
