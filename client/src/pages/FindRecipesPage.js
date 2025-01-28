@@ -72,15 +72,8 @@ export default function FindRecipesPage() {
 	};
 
 	const getRecipes = (count) => {
-		console.log(count);
 		const ingredientsList = ingredients.join(",");
-		const apiURL =
-			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList}&number=${count}&ranking=2&apiKey=${KEY}`.replaceAll(
-				" ",
-				"_"
-			);
-
-		fetch(apiURL, {
+		fetch(`/api/recipe?ingredients=${ingredientsList}&count=${count}`, {
 			method: "GET",
 		}).then((response) => {
 			response.json().then((results) => {
@@ -98,7 +91,10 @@ export default function FindRecipesPage() {
 					<div className="recipes-container">
 						{recipeContext.getRecipes().map((recipe, index) => {
 							return (
-								<RecipeBox key={recipe.index} recipe={recipe} />
+								<RecipeBox
+									key={`recipe=${index}`}
+									recipe={recipe}
+								/>
 							);
 						})}
 						{recipeContext.recipeCount > 0 &&
