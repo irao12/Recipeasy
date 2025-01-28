@@ -73,9 +73,12 @@ export default function FindRecipesPage() {
 
 	const getRecipes = (count) => {
 		const ingredientsList = ingredients.join(",");
-		fetch(`/api/recipe?ingredients=${ingredientsList}&count=${count}`, {
-			method: "GET",
-		}).then((response) => {
+		fetch(
+			`/api/recipe/findByIngredients?ingredients=${ingredientsList}&count=${count}`,
+			{
+				method: "GET",
+			}
+		).then((response) => {
 			response.json().then((results) => {
 				recipeContext.setRecipeResults(results);
 			});

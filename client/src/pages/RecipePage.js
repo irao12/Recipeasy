@@ -6,8 +6,6 @@ import ExperienceModal from "../components/ExperienceModal";
 import "./RecipePage.css";
 import { AuthContext } from "../context/AuthContext";
 
-const KEY = process.env.REACT_APP_API_KEY;
-
 export default function RecipePage() {
 	const auth = useContext(AuthContext);
 	const { recipeID } = useParams();
@@ -37,8 +35,7 @@ export default function RecipePage() {
 	};
 
 	const getRecipeInformation = () => {
-		const url = `https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${KEY}`;
-		console.log(url);
+		const url = `/api/recipe/id/${recipeID}`;
 		fetch(url, {
 			method: "GET",
 		}).then((response) => {
@@ -183,7 +180,7 @@ export default function RecipePage() {
 									{recipe.ingredients.map(
 										(ingredient, index) => {
 											return (
-												<li key={index}>
+												<li key={`ingredient-${index}`}>
 													&#8226; {ingredient}
 												</li>
 											);
@@ -194,9 +191,9 @@ export default function RecipePage() {
 							<div className="recipe-steps">
 								<h3 className="recipe-steps-heading">Steps</h3>
 								<ul className="recipe-steps-list">
-									{recipe.instructions.map((step) => {
+									{recipe.instructions.map((step, index) => {
 										return (
-											<li>
+											<li key={`step-${index}`}>
 												{step.number}. {step.step}
 											</li>
 										);
