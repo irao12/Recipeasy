@@ -62,6 +62,7 @@ export default function LoginPage() {
 
 		auth.authenticate(inputs.email, inputs.password)
 			.then((user) => {
+				auth.setUser(user);
 				navigate("/findrecipes");
 			})
 			.catch((error) => {
@@ -79,7 +80,8 @@ export default function LoginPage() {
 						<form className="login-form" onSubmit={handleSubmit}>
 							<div
 								className={
-									(isEmailValid ? "" : "invalid ") + "login-email"
+									(isEmailValid ? "" : "invalid ") +
+									"login-email"
 								}
 							>
 								<div className="login-icon">
@@ -132,7 +134,7 @@ export default function LoginPage() {
 						</form>
 					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 	);
 }

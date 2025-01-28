@@ -107,6 +107,7 @@ const AuthProvider = ({ children }) => {
 				getIngredientList: getIngredientList,
 				ingredientList,
 				user,
+				setUser,
 				isAuthenticated: user ? true : false,
 				experience: user.experience,
 			}}
